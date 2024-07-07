@@ -28,10 +28,9 @@ export default class Register extends React.Component {
         loading: true
     });
       try{
-        const respons = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(respons);
+       await createUserWithEmailAndPassword(auth, email, password);      
         notification.success({
-            message: "Success Rfegistration",
+            message: "Success Registration",
             description: `Welcome ${firstName} ${lastName}`
         })
       }catch(error){
