@@ -1,7 +1,7 @@
-.auth_register_container{
-    margin: 10px auto;
+.auth_container{
     max-width: 500px;
-    border: 1px solid hsl(0, 0%, 80%);
+    margin: 10px auto;
+    border: 1px solid #ccc;
     padding: 10px;
     border-radius: 12px;
 }

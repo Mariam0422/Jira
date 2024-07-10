@@ -1,29 +1,30 @@
 import React from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../services/firebase/firebase";
-import { Typography, Input, Button,  Form, notification } from "antd";
-import "./index.css"
-export class Login extends React.Component {
+import { Typography, Input, Button,  Form, notification, Divider } from "antd";
+import './index.css'
+
+ class Login extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
         email: '',
         password: '',
+        loading: false
        
       };
-      this.handleChange = this.handleChange.bind(this);
-      this.handleLogin = this.handleLogin.bind(this);
+   
     }
 
-    handleChange(event) {
-    const {name, value} = event.target
-      this.setState({ [name]: value });
+  handleFormChange = (value) => {
+    this.setState(value)
     }
 
-    async handleLogin() {
+     handleLogin = async() => {
       const { email, password } = this.state;
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+      const respons = await signInWithEmailAndPassword(auth, email, password);
+      console.log(respons);
         notification.success({
             message: "Login successful",            
         })
@@ -32,34 +33,39 @@ export class Login extends React.Component {
             message: "Incorrect login details"
         })
       }
+      finally{
+        this.setState({
+          loading: false
+        })
+      }
     }
     render() {
         return (
-          <div className="auth_login_container">
-            <Typography.Title level={2}>Login</Typography.Title>
-            <Form layout="vertical" onFinish={this.handleLogin} >
-              <Form.Item label="Email">                
+          <div className="auth_container">
+            <Typography.Title level={3}>Login</Typography.Title>
+            <Form onValuesChange={this.handleFormChange} >
+              <Form.Item name="email">                
                 <Input
                   type="text"
-                  name="email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                  required
+                  placeholder="Email"
                 />
               </Form.Item>
               
-              <Form.Item label="Password">                
+              <Form.Item name="password">                
                 <Input
                   type="password"
-                  name="password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                  required
+                  placeholder="Password"
                 />
               </Form.Item>
-              <Button type="primary" htmlType="submit">Login</Button>
+              <Divider/>
+              <Button type="primary" 
+              loading={this.state.loading}
+              onClick={this.handleLogin}
+              >
+                Login</Button>
             </Form>        
           </div>
         );
       }
 }
+export default Login
