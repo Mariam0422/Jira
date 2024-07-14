@@ -10,8 +10,7 @@ import './index.css'
       this.state = {
         email: '',
         password: '',
-        loading: false
-       
+        loading: false       
       };
    
     }

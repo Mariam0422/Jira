@@ -1,47 +1,60 @@
 import { Avatar, Dropdown, Typography, Flex, Divider } from "antd";
 import {UserOutlined} from '@ant-design/icons';
-
+import { signOut } from "firebase/auth";
+import { auth } from "../../../../services/firebase/firebase";
+import { getFirstLetters } from "../../../../core/helpers/getFirstLetters";
 
 const {Text} = Typography;
-// const User = {
-//     firstName: 'Davit',
-//     lastName: 'Sargsyan',
-//     headLine: 'Front End Developer',
-//     email: 'sargsyan@mail.ru',
-//     logout: '',
-// }
-const items = [
-    {
-        key: 'profile',
-        label: (
-            <Flex vertical justify="center" align="center">
-            <Avatar size={64} icon={<UserOutlined/>}/>
-            <Text>
-                Davit Sargsyan
-            </Text>
-            <Text underline>
-            sargsyan@mail.ru
-            </Text>        
-            <Divider/>
-            </Flex>
-         
-        ) 
-    },
-    {
-        key: 'logout',
-        label: 'Logout'
+
+const UserProfile = ({userProfileInfo}) => {
+    const {firstName, lastName, headLine, email} = userProfileInfo;    
+    const handleLogout = async () => {
+   try{
+    await signOut(auth);    
+   }
+   catch(e){
+    console.log(e, "error")
+   }
     }
-]
-const UserProfile = () => {
+    const items = [
+        {
+            key: 'profile',
+            label: (
+                <Flex vertical justify="center" align="center">
+                <Avatar size={64} icon={<UserOutlined/>}/>
+                <Text>
+               {firstName} {lastName}
+                </Text>
+                <Text underline>
+                {email}
+                </Text>  
+                <Text type="secondary">
+                    {headLine}
+                </Text>      
+                <Divider/>
+                </Flex>
+             
+            ) 
+        },
+        {
+            key: 'logout',
+            label: (
+                <Text onClick={handleLogout}>
+                 Logout
+                </Text>
+            )
+        }
+    ]
+   
     return(
        <Dropdown 
        menu={{
         items
        }}>
-        <Avatar size="large">
-            MH
+        <Avatar size="large">           
+            {getFirstLetters(`${firstName} ${lastName}`)}
          </Avatar>
-       </Dropdown>         
+       </Dropdown>      
        
     )
 }

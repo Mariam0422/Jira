@@ -32,13 +32,12 @@ export default class Register extends React.Component {
      const uid = response.user.uid;
      const createDoc = doc(db, "registerUsers", uid);
      setDoc(createDoc, {
-      firstName, lastName, headLine
+      firstName, lastName, headLine, email
      })     
         notification.success({
             message: "Success Registration",
             description: `Welcome ${firstName} ${lastName}`
-        })
-        
+        })        
       }catch(error){
    notification.error({
     message: "Wrong Registration",
