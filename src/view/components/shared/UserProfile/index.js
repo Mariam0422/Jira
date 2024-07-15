@@ -54,8 +54,7 @@ const UserProfile = ({userProfileInfo}) => {
         <Avatar size="large">           
             {getFirstLetters(`${firstName} ${lastName}`)}
          </Avatar>
-       </Dropdown>      
-       
+       </Dropdown>    
     )
 }
 export default UserProfile;

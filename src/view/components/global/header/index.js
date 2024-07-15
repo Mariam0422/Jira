@@ -1,7 +1,7 @@
 import {Layout, Button, Typography, Space} from 'antd';
 import UserProfile from '../../shared/UserProfile';
 import './index.css'
-export const Header = ({isAuth, userProfileInfo}) => {
+ const Header = ({isAuth, userProfileInfo}) => {
 
     return (
         <div>
@@ -25,3 +25,4 @@ export const Header = ({isAuth, userProfileInfo}) => {
         </div>
     )
 }
+export default Header;
