@@ -1,26 +1,27 @@
 import React from 'react';
-import Login from './view/pages/auth/login';
-import Register from './view/pages/auth/register';
-import CabinetLayout from './view/layouts/CabinetLayout';
+import { CabinetLayout, MainLayout } from './view/layouts';
+import {Login, Register} from './view/pages/auth';
 import { db, auth, getDoc, onAuthStateChanged, doc} from './services/firebase/firebase';
 import LoadingWrapper from './view/components/shared/LoadingWrapper';
 import Cabinet from './view/pages/cabinet';
-import MainLayout from './view/layouts/MainLayout';
-import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'; 
+import {
+  Route,
+  createBrowserRouter, 
+  createRoutesFromElements, 
+  RouterProvider 
+} from 'react-router-dom'; 
 import './App.css';
 
 const route = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<MainLayout/>}>
-       <Route path='login' element={<Login/>} />
-       <Route path='register' element={<Register/>} />
-
-       <Route path='/cabinet' element={<CabinetLayout/>}>
-       <Route path='/cabinet' element={<Cabinet/>}/>
-       </Route>
+      <Route path="login" element={<Login/>}/>
+      <Route path="register" element={<Register/>}/>
+      <Route path="cabinet" element={<CabinetLayout/>} />
     </Route>
   )
 )
+
 class App extends React.Component {
   constructor(){
     super();
