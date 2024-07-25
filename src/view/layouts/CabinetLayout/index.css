@@ -1,4 +1,25 @@
 .cabinet_layout_container{
-    height: 100vh;
-    background-color: indigo;
+  height: calc(100vh - 64px);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 100px 1fr;
+  grid-template-areas: 
+  ' sidebar subHeader'
+  'sidebar mainContainer';
+  gap: 10px;
+}
+.sidebar{
+  grid-area: sidebar;
+  border: 1px solid black;
+  padding: 10px;
+}
+.sub_header{
+  grid-area: subHeader;
+  border: 1px solid black;
+  padding: 10px;
+}
+.main_container{
+  grid-area: mainContainer;
+  border: 1px solid black;
+  padding: 10px;
 }

@@ -1,9 +1,10 @@
 import React from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../services/firebase/firebase";
-import { Typography, Input, Button,  Form, notification, Divider } from "antd";
-import './index.css'
-
+import { Typography, Input, Button,  Form, notification, Divider, Flex } from "antd";
+import AuthWrapper from "../../../components/shared/AuthWrapper";
+import LoginCoverImg from '../../../../core/images/loginCover.jpg';
+import { Link } from "react-router-dom";
  class Login extends React.Component {
     constructor(props) {
       super(props);
@@ -11,8 +12,7 @@ import './index.css'
         email: '',
         password: '',
         loading: false       
-      };
-   
+      };   
     }
 
   handleFormChange = (value) => {
@@ -40,30 +40,38 @@ import './index.css'
     }
     render() {
         return (
-          <div className="auth_container">
-            <Typography.Title level={3}>Login</Typography.Title>
-            <Form onValuesChange={this.handleFormChange} >
-              <Form.Item name="email">                
+         <AuthWrapper coverImg={LoginCoverImg}>
+            <Typography.Title level={3}>Sign In</Typography.Title>
+            <Form onValuesChange={this.handleFormChange} layout="vertical">
+              <Form.Item name="email" label="Email">                
                 <Input
                   type="text"
                   placeholder="Email"
                 />
               </Form.Item>
               
-              <Form.Item name="password">                
-                <Input
-                  type="password"
+              <Form.Item name="password" label="Password">                
+                <Input.Password                 
                   placeholder="Password"
                 />
               </Form.Item>
               <Divider/>
+              <Flex justify="space-between" align="flex-end">
+                <Typography.Text underline>
+                <Link to="/register"> 
+                Create Account
+                </Link>
+                </Typography.Text>
+            
               <Button type="primary" 
               loading={this.state.loading}
-              onClick={this.handleLogin}
-              >
-                Login</Button>
+              onClick={this.handleLogin}>
+              Login
+              </Button>
+              </Flex>
+             
             </Form>        
-          </div>
+            </AuthWrapper>
         );
       }
 }
