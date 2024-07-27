@@ -1,7 +1,14 @@
+import { useState } from 'react';
 import { Input, Avatar, Button, Divider } from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
+import CreateIssueModal from '../../shared/CreateIssueModal';
 import './index.css';
 const SubHeader = () => {
+    const [modalVisible, setmodalVisible] = useState(false);
+    
+    const handleOpenModal = () => {
+        setmodalVisible(true);
+    }
     return (
         <div className="sub_header">
     <Input.Search 
@@ -22,10 +29,13 @@ const SubHeader = () => {
         <Avatar style={{backgroundColor: 'pink'}}>GA</Avatar>
     </Avatar.Group>
     <Divider type='vertical' />
-    <Button type='primary' icon={<PlusOutlined />}>
+    <Button type='primary' 
+    icon={<PlusOutlined />}
+    onClick={handleOpenModal}>
      Create issue
     </Button>
-        </div>
+    <CreateIssueModal visible={modalVisible} setVisible={setmodalVisible}/>
+    </div>
     )
 }
 export default SubHeader;
