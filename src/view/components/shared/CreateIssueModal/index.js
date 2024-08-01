@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Modal, Form, Input, Select } from 'antd';
 import { issueTypes, priority } from '../../../../core/constant/issue';
-// import Editor from '../Editor';
+import Editor from '../Editor';
 import { doc, setDoc, db } from '../../../../services/firebase/firebase';
 
 const CreateIssueModal = ({visible, setVisible}) => {
   const [form] = Form.useForm();
   const [confirmLoading, setconfirmLoading] = useState(false);
 
-    const handleCloseModal = () => {
-        setVisible(false)
+    const handleCloseModal = () => {      
+        setVisible(false);
+        form.resetFields();
     }
     const handleCreateIssue = async(values) => {
       setconfirmLoading(true);
@@ -18,6 +19,7 @@ const CreateIssueModal = ({visible, setVisible}) => {
         const createDoc =  doc(db, "issue", `${Date.now()}`);
         setDoc(createDoc, values);
         setVisible(false);
+        form.resetFields();
       }
       catch(error){
 
@@ -60,8 +62,7 @@ const CreateIssueModal = ({visible, setVisible}) => {
 
 
         <Form.Item label="Description" name="description" rules={[{required:true, message: "Please input Description"}]}>
-         {/* <Editor/> */}
-         <Input.TextArea placeholder='Despription'/> 
+         <Editor/>
         </Form.Item>
 
 
