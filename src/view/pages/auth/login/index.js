@@ -19,8 +19,9 @@ import { Link } from "react-router-dom";
     this.setState(value)
     }
 
-     handleLogin = async() => {
+  handleLogin = async() => {
       const { email, password } = this.state;
+      this.setState({loading: true})
       try {
       const respons = await signInWithEmailAndPassword(auth, email, password);
       console.log(respons);
