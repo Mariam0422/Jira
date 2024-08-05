@@ -32,8 +32,7 @@ const UserProfile = ({userProfileInfo}) => {
                     {headLine}
                 </Text>      
                 <Divider/>
-                </Flex>
-             
+                </Flex>             
             ) 
         },
         {
