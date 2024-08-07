@@ -6,11 +6,12 @@ import { getFirstLetters } from "../../../../core/helpers/getFirstLetters";
 
 const {Text} = Typography;
 
-const UserProfile = ({userProfileInfo}) => {
+const UserProfile = ({userProfileInfo, setIsAuth}) => {
     const {firstName, lastName, headLine, email} = userProfileInfo;    
     const handleLogout = async () => {
-   try{
-    await signOut(auth);    
+   try{    
+    await signOut(auth);  
+    setIsAuth(false);  
    }
    catch(e){
     console.log(e, "error")
@@ -36,9 +37,10 @@ const UserProfile = ({userProfileInfo}) => {
             ) 
         },
         {
+            onClick: handleLogout,
             key: 'logout',
             label: (
-                <Text onClick={handleLogout}>
+                <Text >
                  Logout
                 </Text>
             )
