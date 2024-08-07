@@ -1,14 +1,16 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import { CabinetLayout, MainLayout } from './view/layouts';
 import {Login, Register} from './view/pages/auth';
 import { db, auth, getDoc, onAuthStateChanged, doc} from './services/firebase/firebase';
+import { AuthContextProvider } from './context/AuthContext';
 import LoadingWrapper from './view/components/shared/LoadingWrapper';
-import Cabinet from './view/pages/cabinet';
+// import Cabinet from './view/pages/cabinet';
 import {
   Route,
   createBrowserRouter, 
   createRoutesFromElements, 
-  RouterProvider 
+  RouterProvider,
+  redirect 
 } from 'react-router-dom'; 
 import './App.css';
 
@@ -21,64 +23,46 @@ const route = createBrowserRouter(
     </Route>
   )
 )
-
-class App extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      isAuth: false,
-      loading: false,
-      userProfileInfo: {
-        firstName: '',
-        lastName: '',
-        headLine: '',
-        email: '',
-      },
-    }
-  }
+const App = () => {
+const [isAuth, setIsAuth] = useState(false);
+const [loading, setLoading] = useState(false);
+const [userProfileInfo, setUserProfileInfo] =  useState({
+  firstName: '',
+  lastName: '',
+  headLine: '',
+  email: '',
+});
 
 
-  componentDidMount(){
-    this.setState({
-      loading: true
+useEffect(() => {
+  setLoading(true);
+  onAuthStateChanged(auth, (user) =>{ 
+  setLoading(false)  
+
+   if(user){     
+    setIsAuth(true)
+    const {uid} = user;
+    const ref = doc(db, 'registerUsers', uid);
+    getDoc(ref).then((userData) => {
+      if(userData.exists()){
+        setUserProfileInfo(userData.data());    
+      }  
     })
-    onAuthStateChanged(auth, (user) =>{ 
-      this.setState({
-        loading: false
-      })   
+   }  else{
+     redirect("/login")
 
-     if(user){     
-      this.setState({
-        isAuth: true
-      });
-      const {uid} = user;
-      const ref = doc(db, 'registerUsers', uid);
-      getDoc(ref).then((userData) => {
-        if(userData.exists()){
-          this.setState({
-            userProfileInfo: userData.data(),
-          })
-      
-        }  
-      })
-     }
-     else{
-      this.setState({
-        isAuth: false
-      });
-     }
-    })
-  }
-  render(){   
-    const {userProfileInfo, loading, isAuth} = this.state;
+   }
+})
+}, [])
 
-    return (
-      <LoadingWrapper loading={loading} fullScreen>
+
+return (
+  <LoadingWrapper loading={loading} fullScreen>
+    <AuthContextProvider value={{isAuth, userProfileInfo, setIsAuth}}>
     <RouterProvider router={route}/>
-      </LoadingWrapper>
-    )
-  }
+    </AuthContextProvider>
+  </LoadingWrapper>
+)
 }
-
 
 export default App;
