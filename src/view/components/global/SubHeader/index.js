@@ -27,7 +27,7 @@ const SubHeader = () => {
       }, [])
 
     return (
-        <div className="sub_header">
+    <div className="sub_header">
     <Input.Search 
     className='search_input'
     placeholder='Search'/>
