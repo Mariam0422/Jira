@@ -1,28 +1,38 @@
 import { useState } from 'react';
-import { Modal, Form, Input, Select } from 'antd';
-import { issueTypes, priority } from '../../../../core/constant/issue';
+import { Modal, Form, Input, Select, notification } from 'antd';
+import { issueTypes, priority, taskStatus } from '../../../../core/constant/issue';
 import Editor from '../Editor';
 import { doc, setDoc, db } from '../../../../services/firebase/firebase';
 
-const CreateIssueModal = ({visible, setVisible}) => {
+const CreateIssueModal = ({visible, setVisible, users}) => {
   const [form] = Form.useForm();
   const [confirmLoading, setconfirmLoading] = useState(false);
-
+ 
+  
     const handleCloseModal = () => {      
         setVisible(false);
         form.resetFields();
     }
     const handleCreateIssue = async(values) => {
       setconfirmLoading(true);
-      try{
-        console.log(values);
+      const taskDataModel = {
+        status: taskStatus.TODO,
+        ...values
+      }
+    
+      try{       
         const createDoc =  doc(db, "issue", `${Date.now()}`);
-        setDoc(createDoc, values);
+        setDoc(createDoc, taskDataModel);
         setVisible(false);
         form.resetFields();
+        notification.success({
+          message: "Your task has been created",          
+        })
       }
       catch(error){
-
+         notification.error({
+          message: "Error ooops :("
+         });
       }finally{
       setconfirmLoading(false);
       }
@@ -37,11 +47,12 @@ const CreateIssueModal = ({visible, setVisible}) => {
    width={800}
    onCancel={handleCloseModal}
    onOk={form.submit}
-   confirmLoading={confirmLoading}>
+   confirmLoading={confirmLoading}
+   >
     <Form layout="vertical" form={form} onFinish={handleCreateIssue}>
 
         <Form.Item 
-          name="isuueType"
+          name="issueType"
           label="Issue Type"
           rules={[{required: true, message: "Plese select Issue Type"}]}>
           <Select 
@@ -64,7 +75,28 @@ const CreateIssueModal = ({visible, setVisible}) => {
         <Form.Item label="Description" name="description" rules={[{required:true, message: "Please input Description"}]}>
          <Editor/>
         </Form.Item>
+        
+        <Form.Item 
+          name="reporter"
+          label="Reporter"
+          rules={[{required: true, message: "Plese select Reporter"}]}>
+          <Select 
+          showSearch
+          placeholder="Reporter"
+          options={users}
+          />
+        </Form.Item>
 
+        <Form.Item 
+          name="assignees"
+          label="Assignees"
+          rules={[{required: true, message: "Plese select Assignees"}]}>
+          <Select 
+          showSearch
+          placeholder="Assignees"
+          options={users}
+          />
+        </Form.Item>
 
         <Form.Item 
           name="priority"
