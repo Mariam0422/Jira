@@ -1,15 +1,13 @@
 import { useContext } from 'react';
-import {Layout, Button, Typography, Space} from 'antd';
+import { Layout, Button, Typography, Space } from 'antd';
 import UserProfile from '../../shared/UserProfile';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthContext';
 import './index.css';
 
 
  const Header = () => {
-    const {isAuth, userProfileInfo, setIsAuth} = useContext(AuthContext);
-  
-    
+    const {isAuth, userProfileInfo, setIsAuth} = useContext(AuthContext);     
     return (
         <div>
         <Layout.Header className='main_header'>
@@ -17,8 +15,7 @@ import './index.css';
             <Typography.Title level={3}>
                 Jira
             </Typography.Title>
-            </Link>
-         
+            </Link>         
             <Space>               
                 {
                   isAuth ? (
