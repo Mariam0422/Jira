@@ -50,7 +50,6 @@ const CreateIssueModal = ({visible, setVisible, users}) => {
    confirmLoading={confirmLoading}
    >
     <Form layout="vertical" form={form} onFinish={handleCreateIssue}>
-
         <Form.Item 
           name="issueType"
           label="Issue Type"

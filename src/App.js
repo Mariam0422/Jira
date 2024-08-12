@@ -4,7 +4,6 @@ import {Login, Register} from './view/pages/auth';
 import { db, auth, getDoc, onAuthStateChanged, doc} from './services/firebase/firebase';
 import { AuthContextProvider } from './context/AuthContext';
 import LoadingWrapper from './view/components/shared/LoadingWrapper';
-// import Cabinet from './view/pages/cabinet';
 import {
   Route,
   createBrowserRouter, 
