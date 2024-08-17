@@ -5,6 +5,7 @@ import { Typography, Input, Button,  Form, notification, Divider, Flex } from "a
 import AuthWrapper from "../../../components/shared/AuthWrapper";
 import LoginCoverImg from '../../../../core/images/loginCover.jpg';
 import { Link, useNavigate } from "react-router-dom";
+import { ROUTES_CONSTANTS } from "../../../../routes";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -16,7 +17,7 @@ const Login = () => {
     try{
       const { email, password } = values
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/cabinet");
+      navigate(ROUTES_CONSTANTS.CABINET);
     }catch(error) {
       console.log(error);
       notification.error({
@@ -60,7 +61,7 @@ const Login = () => {
       <Divider/>
       <Flex justify="space-between" align="flex-end">
         <Typography.Text underline>
-        <Link to="/register"> 
+        <Link to={ROUTES_CONSTANTS.REGISTER}> 
         Create Account
         </Link>
         </Typography.Text>

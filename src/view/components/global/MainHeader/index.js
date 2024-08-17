@@ -3,6 +3,7 @@ import { Layout, Button, Typography, Space } from 'antd';
 import UserProfile from '../../shared/UserProfile';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthContext';
+import { ROUTES_CONSTANTS } from '../../../../routes';
 import './index.css';
 
 
@@ -21,7 +22,7 @@ import './index.css';
                   isAuth ? (
                         <UserProfile setIsAuth={setIsAuth} userProfileInfo={userProfileInfo}/>
                     ) : (
-                        <Link to='/login'>
+                        <Link to={ROUTES_CONSTANTS.LOGIN}>
                           <Button>
                            Login
                           </Button>  
