@@ -4,24 +4,17 @@ import {Login, Register} from './view/pages/auth';
 import { db, auth, getDoc, onAuthStateChanged, doc} from './services/firebase/firebase';
 import { AuthContextProvider } from './context/AuthContext';
 import LoadingWrapper from './view/components/shared/LoadingWrapper';
+import { ROUTES_CONSTANTS } from './routes';
 import {
   Route,
-  createHashRouter, 
+  createBrowserRouter, 
   createRoutesFromElements, 
   RouterProvider,
-  redirect 
+  Navigate 
 } from 'react-router-dom'; 
 import './App.css';
 
-const route = createHashRouter(
-  createRoutesFromElements(
-    <Route path='/' element={<MainLayout/>}>
-      <Route path="login" element={<Login/>}/>
-      <Route path="register" element={<Register/>}/>
-      <Route path="cabinet" element={<CabinetLayout/>} />
-    </Route>
-  )
-)
+
 const App = () => {
 const [isAuth, setIsAuth] = useState(false);
 const [loading, setLoading] = useState(false);
@@ -47,10 +40,7 @@ useEffect(() => {
         setUserProfileInfo(userData.data());    
       }  
     })
-   }  else{
-     redirect("/login")
-
-   }
+   } 
 })
 }, [])
 
@@ -58,7 +48,15 @@ useEffect(() => {
 return (
   <LoadingWrapper loading={loading} fullScreen>
     <AuthContextProvider value={{isAuth, userProfileInfo, setIsAuth}}>
-    <RouterProvider router={route}/>
+    <RouterProvider router={ createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<MainLayout/>}>
+      <Route path={ROUTES_CONSTANTS.LOGIN} element={!isAuth ? <Login/> : <Navigate to={ROUTES_CONSTANTS.CABINET}/>}/>
+      <Route path={ROUTES_CONSTANTS.REGISTER} element={!isAuth ? <Register/> : <Navigate to={ROUTES_CONSTANTS.CABINET}/>}/>
+      <Route path={ROUTES_CONSTANTS.CABINET} element={isAuth ? <CabinetLayout/> : <Navigate to={ROUTES_CONSTANTS.LOGIN}/>} />
+    </Route>
+  )
+)}/>
     </AuthContextProvider>
   </LoadingWrapper>
 )
