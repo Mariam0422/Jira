@@ -5,6 +5,7 @@ import { db, auth, getDoc, onAuthStateChanged, doc} from './services/firebase/fi
 import { AuthContextProvider } from './context/AuthContext';
 import LoadingWrapper from './view/components/shared/LoadingWrapper';
 import { ROUTES_CONSTANTS } from './routes';
+import CabinetBoard from './view/pages/cabinetBoard';
 import {
   Route,
   createBrowserRouter, 
@@ -53,7 +54,10 @@ return (
     <Route path='/' element={<MainLayout/>}>
       <Route path={ROUTES_CONSTANTS.LOGIN} element={!isAuth ? <Login/> : <Navigate to={ROUTES_CONSTANTS.CABINET}/>}/>
       <Route path={ROUTES_CONSTANTS.REGISTER} element={!isAuth ? <Register/> : <Navigate to={ROUTES_CONSTANTS.CABINET}/>}/>
-      <Route path={ROUTES_CONSTANTS.CABINET} element={isAuth ? <CabinetLayout/> : <Navigate to={ROUTES_CONSTANTS.LOGIN}/>} />
+      {/* *------Cabinet Layout Route -------* */}
+      <Route path={ROUTES_CONSTANTS.CABINET} element={isAuth ? <CabinetLayout/> : <Navigate to={ROUTES_CONSTANTS.LOGIN}/>} >
+      <Route path={ROUTES_CONSTANTS.CABINET} element={<CabinetBoard/>}/>
+      </Route>
     </Route>
   )
 )}/>

@@ -2,18 +2,25 @@ import { useState } from 'react';
 import { Modal, Form, Input, Select, notification } from 'antd';
 import { issueTypes, priority, taskStatus } from '../../../../core/constant/issue';
 import Editor from '../Editor';
-import { doc, setDoc, db } from '../../../../services/firebase/firebase';
+import { doc, setDoc, db, updateDoc, arrayUnion } from '../../../../services/firebase/firebase';
 
 const CreateIssueModal = ({visible, setVisible, users}) => {
   const [form] = Form.useForm();
   const [confirmLoading, setconfirmLoading] = useState(false);
  
-  
+    const handleUpdateAssigneesTask = async(taskId,  assignerId) => {
+     const docRef = doc(db, 'registerUsers', assignerId);
+     await updateDoc(docRef, {
+      task: arrayUnion(taskId)
+     })
+    }
+
     const handleCloseModal = () => {      
         setVisible(false);
         form.resetFields();
     }
     const handleCreateIssue = async(values) => {
+      const taskId = `${Date.now()}`;
       setconfirmLoading(true);
       const taskDataModel = {
         status: taskStatus.TODO,
@@ -21,8 +28,9 @@ const CreateIssueModal = ({visible, setVisible, users}) => {
       }
     
       try{       
-        const createDoc =  doc(db, "issue", `${Date.now()}`);
-        setDoc(createDoc, taskDataModel);
+        const createDoc =  doc(db, "issue", taskId);
+        await setDoc(createDoc, taskDataModel);
+        await handleUpdateAssigneesTask(taskId, values.assignees);
         setVisible(false);
         form.resetFields();
         notification.success({
@@ -48,6 +56,13 @@ const CreateIssueModal = ({visible, setVisible, users}) => {
    onCancel={handleCloseModal}
    onOk={form.submit}
    confirmLoading={confirmLoading}
+   styles={{
+    body:{
+      maxHeight: '600px',
+      overflowY: 'auto',
+      overflowX: 'hidden'
+    }
+   }}
    >
     <Form layout="vertical" form={form} onFinish={handleCreateIssue}>
         <Form.Item 
