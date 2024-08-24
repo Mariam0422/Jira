@@ -23,7 +23,8 @@ const CreateIssueModal = ({visible, setVisible, users}) => {
       const taskId = `${Date.now()}`;
       setconfirmLoading(true);
       const taskDataModel = {
-        status: taskStatus.TODO,
+        key: taskId,
+        status: taskStatus.TODO.key,
         ...values
       }
     
