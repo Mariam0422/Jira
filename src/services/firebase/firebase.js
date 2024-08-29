@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, setDoc, getDoc, getDocs, doc, collection } from "firebase/firestore";
+import { getFirestore, setDoc, getDoc, getDocs, doc, collection, updateDoc, arrayUnion} from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyC1nNNGS1n4jJv3hyMXQMoTTBq7W1ArV8U",
   authDomain: "my-project-97152-a7883.firebaseapp.com",
@@ -25,5 +25,7 @@ export {
     getDocs, 
     doc, 
     onAuthStateChanged, 
-    collection
+    collection, 
+    updateDoc, 
+    arrayUnion
  };

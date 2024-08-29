@@ -1,37 +1,33 @@
-import { useContext } from 'react';
-import { Layout, Button, Typography, Space } from 'antd';
-import UserProfile from '../../shared/UserProfile';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../../context/AuthContext';
-import { ROUTES_CONSTANTS } from '../../../../routes';
-import './index.css';
+import { useContext } from "react";
+import { Layout, Button, Typography, Space } from "antd";
+import UserProfile from "../../shared/UserProfile";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../../context/AuthContext";
+import { ROUTES_CONSTANTS } from "../../../../routes";
+import "./index.css";
 
-
- const Header = () => {
-    const {isAuth, userProfileInfo, setIsAuth} = useContext(AuthContext);     
-    return (
-        <div>
-        <Layout.Header className='main_header'>
-            <Link to="/">
-            <Typography.Title level={3}>
-                Jira
-            </Typography.Title>
-            </Link>         
-            <Space>               
-                {
-                  isAuth ? (
-                        <UserProfile setIsAuth={setIsAuth} userProfileInfo={userProfileInfo}/>
-                    ) : (
-                        <Link to={ROUTES_CONSTANTS.LOGIN}>
-                          <Button>
-                           Login
-                          </Button>  
-                       </Link>
-                    )
-                }               
-            </Space>         
-        </Layout.Header>
-        </div>
-    )
-}
+const Header = () => {
+  const { isAuth, userProfileInfo, setIsAuth } = useContext(AuthContext);
+  return (
+    <div>
+      <Layout.Header className="main_header">
+        <Link to="/">
+          <Typography.Title level={3}>Jira</Typography.Title>
+        </Link>
+        <Space>
+          {isAuth ? (
+            <UserProfile
+              setIsAuth={setIsAuth}
+              userProfileInfo={userProfileInfo}
+            />
+          ) : (
+            <Link to={ROUTES_CONSTANTS.LOGIN}>
+              <Button>Login</Button>
+            </Link>
+          )}
+        </Space>
+      </Layout.Header>
+    </div>
+  );
+};
 export default Header;
