@@ -1,0 +1,28 @@
+.mainSection{
+    display: flex;     
+    align-items: center;
+    justify-content: center;
+    padding: 40px 100px;
+    gap: 40px;
+}
+.imgSection > img{
+    max-width: 100%;
+    background-size: cover;
+}
+
+.textSection > .title{
+    font-weight: 700;    
+}
+
+.textSection > .text{
+   font-size: 20px;
+   font-weight: 500;
+}
+@media (max-width: 950px){
+    .mainSection {
+        flex-direction: column;
+    }
+    .imgSection > img{
+     max-width: 100%;
+    }
+}
