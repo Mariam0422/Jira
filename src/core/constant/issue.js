@@ -8,29 +8,32 @@ import {
 
 const ISSUE_OPTION = {
     task: {
-        icon:<CheckSquareOutlined style={{color: "#4fade6"}}/>
+        icon:<CheckSquareOutlined style={{color: "#4fade6"}}/>,
+        label: "Task"
     },
     bag: {
-        icon: <BugOutlined style={{color: "#e44d42"}}/>
+        icon: <BugOutlined style={{color: "#e44d42"}}/>,
+         label: "Bug"
     },
     story: {
-        icon: <FlagOutlined style={{color: "#65ba43"}}/>
+        icon: <FlagOutlined style={{color: "#65ba43"}}/>,
+        label: "Story"
     }
 }
 const issueTypes = [
     {
     value: "bag",
-    label: "Bag",
+    label: ISSUE_OPTION.bag.label,
     icon: ISSUE_OPTION.bag.icon
     },
    {
     value: "task",
-    label: "Task",
+    label: ISSUE_OPTION.task.label,
     icon: ISSUE_OPTION.task.icon
    }, 
    {
     value: "story",
-    label: "Story",
+    label: ISSUE_OPTION.story.label,
     icon: ISSUE_OPTION.story.icon
    },
 ]
