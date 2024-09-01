@@ -22,6 +22,7 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
+import HomeLayout from "./view/layouts/HomeLayout";
 import "./App.css";
 
 const App = () => {
@@ -68,9 +69,10 @@ const App = () => {
     });
   }, []);
 
+
   return (
     <LoadingWrapper loading={loading} fullScreen>
-      <AuthContextProvider value={{ isAuth, userProfileInfo, setIsAuth, issueLoading, columns,setColumns, hadleGetIssues }}>
+  <AuthContextProvider value={{ isAuth, userProfileInfo, setIsAuth, issueLoading, columns,setColumns, hadleGetIssues }}>
         <RouterProvider
           router={createBrowserRouter(
             createRoutesFromElements(
