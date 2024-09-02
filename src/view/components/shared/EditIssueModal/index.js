@@ -1,62 +1,79 @@
-import { useEffect } from "react";
-import {
-  Modal, Form, Input,
-  Select,
-  notification,
-  Typography,
-  Space,
-} from "antd";
-import { ISSUE_OPTION } from "../../../../core/constant/issue";
-import IssueModalForm from "../IssueModalForm";
+import { useContext, useEffect, useState} from 'react';
+import { Modal, Form, Input, Select, notification, Typography, Space } from 'antd';
+import { ISSUE_OPTION } from '../../../../core/constant/issue';
+import { doc, updateDoc, db } from '../../../../services/firebase/firebase';
+import IssueModalForm from '../IssueModalForm';
+import { AuthContext } from '../../../../context/AuthContext';
+const { Text } = Typography
+const EditIssueModal = ({ visible, onClose, issueData }) => {
+    const [ form ] = Form.useForm();
+    const [confirmLoading, setConfirmLoading] = useState(false)
+    const { handleGetIssues } = useContext(AuthContext)
+    const handleClose = () => {
+        onClose();
+    }
 
-const { Text } = Typography;
-const EditIssueModal = ({ visible, onClose, users, issueData }) => {
-  const [form] = Form.useForm();
+    useEffect(() => {
+        const { key, index, ...restData} = issueData
+        form.setFieldsValue(restData)
+    })
 
-  useEffect((() => {
-    const { key, index, ...restData } = issueData; 
-    form.setFieldValue(restData);
-  }), [])
-  const handleEditForm = () => {
+    const handleEditForm = async values => {
+        setConfirmLoading(true)
+        const docRef = doc(db, 'issue', issueData.key)
+        await updateDoc(docRef, values)
+        handleClose()
+        handleGetIssues()
+        notification.success({
+            message: 'Your task has been updated'
+        })
+        try {
 
-  }
-  const handleClose = () => {
-    onClose();
-  };
-
-  return (
-    <div>
-      <Modal
-        title={
-          <div>
-            <Space>
-              {ISSUE_OPTION[issueData.issueType].icon}
-              <Text type="secondary">
-                {ISSUE_OPTION[issueData.issueType].label} {issueData.key}
-              </Text>
-            </Space>
-          </div>
+        } 
+        catch(error) {
+            console.log(error)
+        } 
+        finally {
+            setConfirmLoading(false)
         }
-        okText="Edit Issue"
-        centered
-        open={visible}
-        onCancel={handleClose}
-        width={800}
-        style={{
-          body: {
-            maxHeight: "600px",
-            overflowY: "auto",
-            overflowX: "hidden",
-          },
-        }}
-      >
-        <IssueModalForm
-        form={form}
-        onFinish={handleEditForm}
-        users={[]}
-        />
-      </Modal>
-    </div>
-  );
-};
-export default EditIssueModal;
+    }
+
+
+    return (
+        <Modal
+            title={
+                <Space>
+                    {ISSUE_OPTION[issueData.issueType].icon}
+                    <Text>
+                        {' '}
+                        {ISSUE_OPTION[issueData.issueType].label}
+                        {"-"}
+                        {issueData.key}
+                    </Text>
+                </Space>
+            }
+            okText="Edit Issue"
+            centered
+            confirmLoading={confirmLoading}
+            onCancel={handleClose}
+            open={visible}
+            onOk={form.submit}
+            width={800}
+            styles={{
+                body: {
+                    maxHeight: '550px',
+                    overflowY: 'auto',
+                    overflowX: 'hidden',
+                    padding: 10
+                }
+            }}
+        >
+            <IssueModalForm
+                form={form}
+                onFinish={handleEditForm}
+            />
+        </Modal>
+    )
+}
+
+export default EditIssueModal

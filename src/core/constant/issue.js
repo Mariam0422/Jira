@@ -13,7 +13,7 @@ const ISSUE_OPTION = {
     },
     bag: {
         icon: <BugOutlined style={{color: "#e44d42"}}/>,
-         label: "Bug"
+        label: "Bug"
     },
     story: {
         icon: <FlagOutlined style={{color: "#65ba43"}}/>,
