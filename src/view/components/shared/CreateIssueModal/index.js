@@ -13,7 +13,7 @@ import {
 import { AuthContext } from "../../../../context/AuthContext";
 import IssueModalForm from "../IssueModalForm";
 
-const CreateIssueModal = ({ visible, setVisible, users }) => {
+const CreateIssueModal = ({ visible, setVisible }) => {
   const [form] = Form.useForm();
   const [confirmLoading, setconfirmLoading] = useState(false);
   const { hadleGetIssues } = useContext(AuthContext);
@@ -68,15 +68,15 @@ const CreateIssueModal = ({ visible, setVisible, users }) => {
       confirmLoading={confirmLoading}
       styles={{
         body: {
-          maxHeight: "600px",
+          maxHeight: "550px",
           overflowY: "auto",
           overflowX: "hidden",
+          padding: 10
         },
       }}
     >
      <IssueModalForm
-     form={form}
-     users={users}
+     form={form}   
      onFinish={handleCreateIssue}
      />
     </Modal>

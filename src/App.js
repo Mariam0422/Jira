@@ -29,6 +29,7 @@ const App = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [loading, setLoading] = useState(false);
   const [columns, setColumns] = useState(taskStatusModel); //todo
+  const [users, setUsers ]= useState([]);
   const [issueLoading, setissueLoading] = useState(false)//todo
 
   const [userProfileInfo, setUserProfileInfo] = useState({
@@ -37,6 +38,7 @@ const App = () => {
     headLine: "",
     email: "",
   });
+  
   const hadleGetIssues = async () => { //todo
     setissueLoading(true)
     const updatedTaskStatusModel = taskStatusModel();
@@ -52,6 +54,20 @@ const App = () => {
     setColumns({ ...updatedTaskStatusModel });
     setissueLoading(false)
   };
+  useEffect(() => {
+    const handleGetUsersData = async () => {
+        const queryData = await getDocs(collection(db, 'registerUsers'));
+        const result = queryData.docs.map((doc) => {
+            const { firstName, lastName } = doc.data();
+            return {label: `${firstName} ${lastName}`, value: doc.id}
+        });
+
+        setUsers(result);
+    }
+
+    handleGetUsersData();
+  }, []);
+
   useEffect(() => {
     setLoading(true);//todo
     onAuthStateChanged(auth, (user) => {
@@ -73,7 +89,7 @@ const App = () => {
 
   return (
     <LoadingWrapper loading={loading} fullScreen>
-  <AuthContextProvider value={{ isAuth, userProfileInfo, setIsAuth, issueLoading, columns,setColumns, hadleGetIssues }}>
+      <AuthContextProvider value={{ isAuth, userProfileInfo, setIsAuth, issueLoading, columns,setColumns, hadleGetIssues, users }}>
         <RouterProvider
           router={createBrowserRouter(
             createRoutesFromElements(
