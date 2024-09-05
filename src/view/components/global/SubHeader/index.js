@@ -1,9 +1,8 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { AuthContext } from '../../../../context/AuthContext';
 import { Input, Avatar, Button, Divider } from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import CreateIssueModal from '../../shared/CreateIssueModal';
-import { getDocs, db, collection } from '../../../../services/firebase/firebase';
 import { getFirstLetters } from '../../../../core/helpers/getFirstLetters';
 import './index.css';
 const SubHeader = () => {
@@ -12,19 +11,7 @@ const SubHeader = () => {
         setmodalVisible(true);
     }
 
-    // useEffect(() => {
-    //     const handleGetUserData = async () => {
-        
-    //       const queryData = await getDocs(collection(db, 'registerUsers'));
-          
-    //       const result = queryData.docs.map((doc) => {
-    //         const { firstName, lastName } = doc.data();
-    //         return {label: `${firstName} ${lastName}`, value: doc.id}
-    //       })
-    //           setUsers(result);
-    //     }
-    //     handleGetUserData();
-    //   }, [])
+ 
  const { users } = useContext(AuthContext);
 
 
