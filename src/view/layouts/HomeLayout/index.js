@@ -111,25 +111,25 @@ import "./index.css";
                     </div>
               <ul>
                 <li style={{fontWeight: "500"}}>                 
-                    <a href="#">Company</a>                  
+                    <span>Company</span>                  
                 </li>
                 <li style={{fontWeight: "500"}}>                 
-                    <a href="#">Careers</a>                  
+                    <span>Careers</span>                  
                 </li>
                 <li style={{fontWeight: "500"}}>                 
-                    <a href="#">Events</a>                 
+                    <span>Events</span>             
                 </li>
                 <li style={{fontWeight: "500"}}>                
-                    <a href="#">Blogs</a>              
+                    <span>Blogs</span>              
                 </li>
                 <li style={{fontWeight: "500"}}>                  
-                    <a href="#">Investor Relations</a>                  
+                   <span>Investor Relations</span>                  
                 </li>
                 <li style={{fontWeight: "500"}}>                  
-                    <a href="#">Atlassian Foundation</a>                  
+                    <span>Atlassian Foundation</span>                
                 </li>
                 <li style={{fontWeight: "500"}}>                  
-                    <a href="#">Contact us</a>                  
+                    <span>Contact us</span>                  
                 </li>
               </ul>
             </div>
@@ -140,25 +140,25 @@ import "./index.css";
               </div>
               <ul>
                 <li>                    
-                    <a href="#">Rovo</a>                    
+                    <span>Rovo</span>                    
                 </li>
                 <li>
-                    <a href="#">Jira</a>
+                    <span>Jira</span>
                 </li>
                 <li>
-                    <a href="#">Jira Align</a>
+                    <span>Jira Align</span>
                 </li>
                 <li>
-                    <a href="#">Jira Service Management</a>
+                    <span>Jira Service Management</span>
                 </li>
                 <li>
-                    <a href="#">Confluence</a>
+                    <span>Confluence</span>
                 </li>
                 <li>
-                    <a href="#">Trello</a>
+                    <span>Trello</span>
                 </li>
                 <li>
-                    <a href="#">Bitbucket</a>
+                    <span>Bitbucket</span>
                 </li>
               </ul>
             </div>
@@ -169,22 +169,22 @@ import "./index.css";
               </div>
               <ul>
                 <li>                    
-                    <a href="#">Technical support</a>                    
+                    <span>Technical support</span>                    
                 </li>
                 <li>
-                    <a href="#">Purchasing & licensing</a>
+                    <span>Purchasing & licensing</span>
                 </li>
                 <li>
-                    <a href="#">Atlassian Community</a>
+                    <span>Atlassian Community</span>
                 </li>
                 <li>
-                    <a href="#">Knowledge base</a>
+                    <span>Knowledge base</span>
                 </li>
                 <li>
-                    <a href="#">Marketplace</a>
+                    <span>Marketplace</span>
                 </li>
                 <li>
-                    <a href="#">My account</a>
+                    <span>My account</span>
                 </li>                
               </ul>
             </div>
@@ -195,19 +195,19 @@ import "./index.css";
               </div>
               <ul>
                 <li>                    
-                    <a href="#">Partners</a>                    
+                    <span>Partners</span>                    
                 </li>
                 <li>
-                    <a href="#">Training & certification</a>
+                    <span>Training & certification</span>
                 </li>
                 <li>
-                    <a href="#">Documentation</a>
+                    <span>Documentation</span>
                 </li>
                 <li>
-                    <a href="#">Developer resources</a>
+                    <span>Developer resources</span>
                 </li>
                 <li>
-                    <a href="#">Enterprise services</a>
+                    <span>Enterprise services</span>
                 </li>
                                
               </ul>
@@ -219,13 +219,13 @@ import "./index.css";
             </div>
             <div style={{display: "flex", gap: "20px"}}>
                 <p>
-                    <a href="#">Privacy policy</a>
+                    <span>Privacy policy</span>
                 </p>
                 <p>
-                    <a href="#">Terms</a>
+                    <span>Terms</span>
                 </p>
                 <p>
-                    <a href="#">Impressum</a>
+                    <span>Impressum</span>
                 </p>
             </div>
           </div>

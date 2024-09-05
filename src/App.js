@@ -30,7 +30,6 @@ const App = () => {
   const [columns, setColumns] = useState(taskStatusModel); //todo
   const [users, setUsers ]= useState([]);
   const [issueLoading, setissueLoading] = useState(false)//todo
-
   const [userProfileInfo, setUserProfileInfo] = useState({
     firstName: "",
     lastName: "",
