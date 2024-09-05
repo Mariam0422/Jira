@@ -3,18 +3,18 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { db, updateDoc, doc } from "../../../services/firebase/firebase";
 import { Typography, Flex } from "antd";
 import EditIssueModal from "../../components/shared/EditIssueModal";
-import { ISSUE_OPTION, issueTypes, PRIORITY_OPTION } from "../../../core/constant/issue";
+import { ISSUE_OPTION, PRIORITY_OPTION } from "../../../core/constant/issue";
 import "./index.css";
 import { AuthContext } from "../../../context/AuthContext";
 const { Title, Text } = Typography;
 
 const CabinetBoard = () => {
-  const { columns, handleGetIssues, setColumns, issueLoading } = useContext(AuthContext);
+  const { columns, handleGetIssues, setColumns } = useContext(AuthContext);
   const [ selectedIssueData, setSelectedIssueData ] = useState(null);
 
   useEffect(() => {
     handleGetIssues();
-  }, []);
+  }, [handleGetIssues]);
   const handleDragEnd = (result) => {
 
     const { destination, source } = result;

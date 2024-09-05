@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { CabinetLayout, MainLayout } from "./view/layouts";
 import { Login, Register } from "./view/pages/auth";
 import {
@@ -22,7 +22,6 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
-import HomeLayout from "./view/layouts/HomeLayout";
 import "./App.css";
 
 const App = () => {
@@ -39,21 +38,21 @@ const App = () => {
     email: "",
   });
   
-  const handleGetIssues = async () => { //todo
+  const handleGetIssues = useCallback(async () => { //todo
     setissueLoading(true)
     const updatedTaskStatusModel = taskStatusModel();
     const queryData = await getDocs(collection(db, "issue"));
-    queryData.docs.map((doc) => {
+    queryData.docs.forEach((doc) => {
       const data = doc.data();
       const { status } = data;
       if (updatedTaskStatusModel[status]) {
         updatedTaskStatusModel[status].items.push(data);
-      }
-    });
+      }          
+  })
 
     setColumns({ ...updatedTaskStatusModel });
     setissueLoading(false)
-  };
+  }, []);
   useEffect(() => {
     const handleGetUsersData = async () => {
         const queryData = await getDocs(collection(db, 'registerUsers'));

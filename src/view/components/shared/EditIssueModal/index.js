@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState} from 'react';
-import { Modal, Form, Input, Select, notification, Typography, Space } from 'antd';
+import { Modal, Form, notification, Typography, Space } from 'antd';
 import { ISSUE_OPTION } from '../../../../core/constant/issue';
 import { doc, updateDoc, db } from '../../../../services/firebase/firebase';
 import IssueModalForm from '../IssueModalForm';
@@ -16,7 +16,7 @@ const EditIssueModal = ({ visible, onClose, issueData }) => {
     useEffect(() => {
         const { key, index, ...restData} = issueData
         form.setFieldsValue(restData)
-    })
+    }, [issueData, form])
 
     const handleEditForm = async values => {
         setConfirmLoading(true)
