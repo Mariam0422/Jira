@@ -8,7 +8,7 @@ const { Text } = Typography
 const EditIssueModal = ({ visible, onClose, issueData }) => {
     const [ form ] = Form.useForm();
     const [confirmLoading, setConfirmLoading] = useState(false)
-    const { handleGetIssues } = useContext(AuthContext)
+    const { handleGetIssues } = useContext(AuthContext);
     const handleClose = () => {
         onClose();
     }
@@ -22,7 +22,7 @@ const EditIssueModal = ({ visible, onClose, issueData }) => {
         setConfirmLoading(true)
         const docRef = doc(db, 'issue', issueData.key)
         await updateDoc(docRef, values)
-        handleClose()
+        handleClose();
         handleGetIssues()
         notification.success({
             message: 'Your task has been updated'

@@ -9,14 +9,13 @@ import { AuthContext } from "../../../context/AuthContext";
 const { Title, Text } = Typography;
 
 const CabinetBoard = () => {
-  const { columns, hadleGetIssues, setColumns, issueLoading } = useContext(AuthContext);
+  const { columns, handleGetIssues, setColumns, issueLoading } = useContext(AuthContext);
   const [ selectedIssueData, setSelectedIssueData ] = useState(null);
 
   useEffect(() => {
-    hadleGetIssues();
+    handleGetIssues();
   }, []);
   const handleDragEnd = (result) => {
-    console.log(result);
 
     const { destination, source } = result;
     const sourceColumn = columns[source.droppableId];

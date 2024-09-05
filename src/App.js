@@ -39,7 +39,7 @@ const App = () => {
     email: "",
   });
   
-  const hadleGetIssues = async () => { //todo
+  const handleGetIssues = async () => { //todo
     setissueLoading(true)
     const updatedTaskStatusModel = taskStatusModel();
     const queryData = await getDocs(collection(db, "issue"));
@@ -89,7 +89,7 @@ const App = () => {
 
   return (
     <LoadingWrapper loading={loading} fullScreen>
-      <AuthContextProvider value={{ isAuth, userProfileInfo, setIsAuth, issueLoading, columns,setColumns, hadleGetIssues, users }}>
+      <AuthContextProvider value={{ isAuth, userProfileInfo, setIsAuth, issueLoading, columns,setColumns, handleGetIssues, users }}>
         <RouterProvider
           router={createBrowserRouter(
             createRoutesFromElements(
