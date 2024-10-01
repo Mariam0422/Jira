@@ -1,4 +1,6 @@
-export const getFirstLetters = (fullName) => {  
-const splitName = fullName.trim().split(" ");
-return splitName.map((name) => name[0]?.toUpperCase()).join(" "); 
+export const getFirstLetters = (fullName) => {
+    const splitNames = fullName.trim().split(' '); 
+    return splitNames.map((name) => name[0]?.toUpperCase()).join(' '); 
 };
+
+

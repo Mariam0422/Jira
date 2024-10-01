@@ -1,9 +1,10 @@
 const ROUTES_CONSTANTS = {
- LOGIN : '/login',
- REGISTER: '/register',
- CABINET: '/cabinet',
- EDIT_PROFILE: '/edit-profile'
+    LOGIN: '/login',
+    REGISTER: '/register',
+    CABINET: '/cabinet',
+    EDIT_PROFILE: '/edit-profile'
 }
+
 export {
- ROUTES_CONSTANTS
+    ROUTES_CONSTANTS
 }
