@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { db, updateDoc, doc } from "../../../services/firebase/firebase";
 import LoadingWrapper from "../../components/shared/LoadingWrapper";
 import { Typography, Flex } from "antd";
-
+import { fetchUsersData } from "../../../state-managment/reducers/usersSlice";
 import EditIssueModal from "../../components/shared/EditIssueModal";
 import { ISSUE_OPTION, PRIORITY_OPTION } from "../../../core/constants/issue";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,6 @@ import "./index.css";
 const { Title, Text } = Typography;
 
 const CabinetBoard = () => {
-
   const [selectedIssueData, setSelectedIssueData] = useState(null);
   const dispatch = useDispatch();
 
@@ -22,6 +21,7 @@ const CabinetBoard = () => {
 
   useEffect(() => {
     dispatch(fetchIssuesData());
+    dispatch(fetchUsersData());
   }, []);
 
   const handleDragEnd = (result) => { 
