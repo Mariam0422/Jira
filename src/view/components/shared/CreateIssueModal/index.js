@@ -1,7 +1,7 @@
-import { useState,  } from "react";
+import { useState } from "react";
 import { Modal, Form, notification } from "antd";
-import { useDispatch } from 'react-redux';
-import { fetchIssuesData } from '../../../../state-managment/reducers/issuesSlice';
+import { useDispatch } from "react-redux";
+import { fetchIssuesData } from "../../../../state-managment/slices/issuesSlice";
 import { taskStatus } from "../../../../core/constants/issue";
 import {
   doc,
